@@ -15,10 +15,15 @@
         <div id="contentArea">
             <div class="col-12">
                 <row v-for="item in itemList" class="row" style="cursor: pointer;">
-<h2>{{item.TaskName}} | {{convertToDisplayTime(item.TotalSecond)}}</h2>
+                    <div class="col-11">
+                        <span class="fs-2">{{item.itemName}} | {{convertToDisplayTime(item.totalSecond)}} </span>
+                    </div>
+                    <div class="col-1">
+                        <span class="fs-2" @click="removeItem(item.itemId)">X</span>
+                    </div>
                 </row>
                 <div class="row bg-secondary" style="cursor: pointer;" onclick="newItem()">
-                    <h2>New An Item ... </h2>
+                    <span class="fs-2">New An Item ... </span>
                 </div>
             </div>
         </div>

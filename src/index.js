@@ -3,8 +3,9 @@ const app = Vue.createApp({
     data() {
         return {
             itemList: [{
-                "TaskName": "Read related material",
-                "TotalSecond": 0
+                "itemId": 0,
+                "itemName": "Read related material",
+                "totalSecond": 0
             }],
         };
     },
@@ -21,6 +22,9 @@ const app = Vue.createApp({
             }
             timeStr += timeInSecond;
             return timeStr;
+        },
+        removeItem(itemId) {
+            this.itemList = this.itemList.filter(x => x.itemId != itemId);
         }
     }
 });
