@@ -1,3 +1,8 @@
 .focusedItem{
     border: 2px solid red;
 }
+.makeInputLookLikeText{
+    background: transparent;
+    border: none;
+    text-align: inherit;
+}

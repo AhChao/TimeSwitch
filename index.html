@@ -17,7 +17,7 @@
             <div class="col-12">
                 <row v-for="item in itemList" :class="{row:true,focusedItem:timer.timerTarget == item.itemId}" :style="{'cursor': 'pointer', 'background-color': item.bgColor}">
                     <div class="col-11">
-                        <span class="fs-2">{{item.itemName}} | </span><span class="fs-2" @click="changeTimerTarget(item.itemId)"> {{convertToDisplayTime(item.totalSecond)}}</span>
+                        <span class="fs-2"><input class="makeInputLookLikeText" v-model="item.itemName"> | </span><span class="fs-2" @click="changeTimerTarget(item.itemId)"> {{convertToDisplayTime(item.totalSecond)}}</span>
                     </div>
                     <div class="col-1">
                         <input v-bind:id="'color'+item.itemId" type="color" v-bind:value="item.bgColor" @change="changeColor('color'+item.itemId)">
