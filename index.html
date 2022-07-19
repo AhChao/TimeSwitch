@@ -5,18 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet">
     <title>Time Switch</title>
 </head>
 <body id="app">
     <div class="container text-center" style="width: 100%">
         <div class="col-12">
-            <div class="row bg-primary"><h1>Time Switch</h1></div>
+            <div class="row bg-primary"><h1>Time Switch<span class="float-end" @click="stopTimer()">□</span></h1></div>
         </div>
         <div id="contentArea">
             <div class="col-12">
-                <row v-for="item in itemList" class="row" :style="{'cursor': 'pointer', 'background-color': item.bgColor}">
+                <row v-for="item in itemList" :class="{row:true,focusedItem:timer.timerTarget == item.itemId}" :style="{'cursor': 'pointer', 'background-color': item.bgColor}">
                     <div class="col-11">
-                        <span class="fs-2">{{item.itemName}} | {{convertToDisplayTime(item.totalSecond)}}</span>
+                        <span class="fs-2">{{item.itemName}} | </span><span class="fs-2" @click="changeTimerTarget(item.itemId)"> {{convertToDisplayTime(item.totalSecond)}}</span>
                     </div>
                     <div class="col-1">
                         <input v-bind:id="'color'+item.itemId" type="color" v-bind:value="item.bgColor" @change="changeColor('color'+item.itemId)">
