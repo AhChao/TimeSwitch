@@ -5,7 +5,8 @@ const app = Vue.createApp({
             itemList: [{
                 "itemId": 0,
                 "itemName": "Read related material",
-                "totalSecond": 0
+                "totalSecond": 0,
+                "bgColor": this.getRandomColor()
             }],
         };
     },
@@ -23,9 +24,27 @@ const app = Vue.createApp({
             timeStr += timeInSecond;
             return timeStr;
         },
+        newItem() {
+            let newId = Math.max(...this.itemList.map(x => x.itemId)) + 1;
+            this.itemList.push(
+                {
+                    "itemId": newId,
+                    "itemName": "Click to edit",
+                    "totalSecond": 0,
+                    "bgColor": this.getRandomColor(),
+                    "temp": ""
+                }
+            );
+        },
         removeItem(itemId) {
             this.itemList = this.itemList.filter(x => x.itemId != itemId);
-        }
+        },
+        getRandomColor() {
+            return "#" + Math.floor(Math.random() * 16777215).toString(16);
+        },
+        changeColor(id) {
+            this.itemList.filter(x => "color" + x.itemId == id)[0].bgColor = document.getElementById(id).value;
+        },
     }
 });
 app.mount('#app');
