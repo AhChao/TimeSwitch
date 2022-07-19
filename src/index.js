@@ -68,9 +68,6 @@ const app = Vue.createApp({
         getRandomColor() {
             return "#" + Math.floor(Math.random() * 16777215).toString(16);
         },
-        changeColor(id) {
-            this.itemList.filter(x => "color" + x.itemId == id)[0].bgColor = document.getElementById(id).value;
-        },
     }
 });
 app.mount('#app');

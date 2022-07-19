@@ -20,7 +20,7 @@
                         <span class="fs-2"><input class="makeInputLookLikeText" v-model="item.itemName"> | </span><span class="fs-2" @click="changeTimerTarget(item.itemId)"> {{convertToDisplayTime(item.totalSecond)}}</span>
                     </div>
                     <div class="col-1">
-                        <input v-bind:id="'color'+item.itemId" type="color" v-bind:value="item.bgColor" @change="changeColor('color'+item.itemId)">
+                        <input v-bind:id="'color'+item.itemId" type="color" v-model="item.bgColor">
                         <span class="fs-2" @click="removeItem(item.itemId)">X</span>
                     </div>
                 </row>
