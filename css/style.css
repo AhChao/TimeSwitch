@@ -6,3 +6,6 @@
     border: none;
     text-align: inherit;
 }
+.clickable{
+    cursor: pointer;
+}

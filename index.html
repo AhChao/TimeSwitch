@@ -11,7 +11,7 @@
 <body id="app">
     <div class="container text-center" style="width: 100%">
         <div class="col-12">
-            <div class="row bg-primary"><h1>Time Switch<span class="float-end" @click="stopTimer()">□</span></h1></div>
+            <div class="row bg-primary"><h1>Time Switch<span class="float-end clickable" @click="stopTimer()">□</span></h1></div>
         </div>
         <div id="contentArea">
             <div class="col-12">
@@ -24,7 +24,7 @@
                         <span class="fs-2" @click="removeItem(item.itemId)">X</span>
                     </div>
                 </row>
-                <div class="row bg-secondary" style="cursor: pointer;" @click="newItem()">
+                <div class="row bg-secondary clickable" @click="newItem()">
                     <span class="fs-2">New An Item ... </span>
                 </div>
             </div>
