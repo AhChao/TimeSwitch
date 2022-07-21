@@ -53,12 +53,17 @@ const app = Vue.createApp({
         },
         stopTimer() {
             clearInterval(this.timer.timerInstance);
+            this.timer.timerInstance = null;
         },
         timerDoSth() {
             if (this.itemList.map(x => x.itemId).indexOf(this.timer.timerTarget) == -1) return;
             this.itemList.filter(x => x.itemId == this.timer.timerTarget)[0].totalSecond++;
         },
         changeTimerTarget(id) {
+            if (this.timer.timerTarget == id && this.timer.timerInstance != null) {
+                this.stopTimer();
+                return;
+            }
             this.timer.timerTarget = id;
             this.startTimer();
         },
