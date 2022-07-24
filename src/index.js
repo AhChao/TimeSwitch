@@ -2,6 +2,10 @@ const app = Vue.createApp({
     created() { },
     data() {
         return {
+            edit: {
+                editing: false,
+                editTarget: ""
+            },
             timer: {
                 timerTarget: "",
                 timerInstance: null,
@@ -58,6 +62,21 @@ const app = Vue.createApp({
         timerDoSth() {
             if (this.itemList.map(x => x.itemId).indexOf(this.timer.timerTarget) == -1) return;
             this.itemList.filter(x => x.itemId == this.timer.timerTarget)[0].totalSecond++;
+        },
+        editTime(id) {
+            this.stopTimer();
+            this.edit.editTarget = id;
+            let timeString = this.convertToDisplayTime(this.itemList.filter(x => x.itemId == id)[0].totalSecond).split(":");
+            document.getElementById("timeHour").value = timeString[0];
+            document.getElementById("timeMinute").value = timeString[1];
+            document.getElementById("timeSecond").value = timeString[2];
+        },
+        updateTime() {
+            document.getElementById("closeModalButton").click();
+            var totalSecond = document.getElementById("timeHour").value * 3600 +
+                document.getElementById("timeMinute").value * 60 +
+                document.getElementById("timeSecond").value * 1;
+            this.itemList.filter(x => x.itemId == this.edit.editTarget)[0].totalSecond = totalSecond;
         },
         changeTimerTarget(id) {
             if (this.timer.timerTarget == id && this.timer.timerInstance != null) {

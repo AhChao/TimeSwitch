@@ -16,12 +16,13 @@
         <div id="contentArea">
             <div class="col-12">
                 <row v-for="item in itemList" :class="{row:true,focusedItem:timer.timerTarget == item.itemId}" :style="{'cursor': 'pointer', 'background-color': item.bgColor}">
-                    <div class="col-11">
+                    <div class="col-10">
                         <span class="fs-2"><input class="makeInputLookLikeText" v-model="item.itemName"> | </span><span class="fs-2" @click="changeTimerTarget(item.itemId)"> {{convertToDisplayTime(item.totalSecond)}}</span>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <input v-bind:id="'color'+item.itemId" type="color" v-model="item.bgColor">
-                        <span class="fs-2" @click="removeItem(item.itemId)">X</span>
+                        <span class="fs-2" @click="editTime(item.itemId)" data-bs-toggle="modal" data-bs-target="#modal">✎</span>
+                        <span class="fs-2" @click="removeItem(item.itemId)">🗙</span>
                     </div>
                 </row>
                 <div class="row bg-secondary clickable" @click="newItem()">
@@ -30,8 +31,31 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Edit Time</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <span><input id="timeHour" class="makeInputLookLikeText"  style="max-width: 20%;" type="number" value="00"></span>
+                     : <span><input id="timeMinute" class="makeInputLookLikeText"  style="max-width: 20%;" type="number" value="00"></span>
+                     : <span><input id="timeSecond" class="makeInputLookLikeText"  style="max-width: 20%;" type="number" value="00"></span>
+                 </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" id="closeModalButton" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="updateTime()">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
     <script src="lib/hackerTimer.min.js"></script>
     <script src="lib/vue.global.js"></script>
+    <script src="lib/bootstrap.bundle.min.js"></script>
     <script src="src/index.js"></script>
 </body>
 </html>
