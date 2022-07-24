@@ -60,13 +60,17 @@ const app = Vue.createApp({
             this.timer.timerInstance = null;
         },
         timerDoSth() {
-            if (this.itemList.map(x => x.itemId).indexOf(this.timer.timerTarget) == -1) return;
-            this.itemList.filter(x => x.itemId == this.timer.timerTarget)[0].totalSecond++;
+            let timerTarget = this.timer.timerTarget;
+            if (this.itemList.map(x => x.itemId).indexOf(timerTarget) == -1) return;
+            this.getTargetItemById(timerTarget).totalSecond++;
+        },
+        getTargetItemById(id) {
+            return this.itemList.filter(x => x.itemId == id)[0];
         },
         editTime(id) {
             this.stopTimer();
             this.edit.editTarget = id;
-            let timeString = this.convertToDisplayTime(this.itemList.filter(x => x.itemId == id)[0].totalSecond).split(":");
+            let timeString = this.convertToDisplayTime(this.getTargetItemById(id).totalSecond).split(":");
             document.getElementById("timeHour").value = timeString[0];
             document.getElementById("timeMinute").value = timeString[1];
             document.getElementById("timeSecond").value = timeString[2];
@@ -76,7 +80,7 @@ const app = Vue.createApp({
             var totalSecond = document.getElementById("timeHour").value * 3600 +
                 document.getElementById("timeMinute").value * 60 +
                 document.getElementById("timeSecond").value * 1;
-            this.itemList.filter(x => x.itemId == this.edit.editTarget)[0].totalSecond = totalSecond;
+            this.getTargetItemById(this.edit.editTarget).totalSecond = totalSecond;
         },
         changeTimerTarget(id) {
             if (this.timer.timerTarget == id && this.timer.timerInstance != null) {
