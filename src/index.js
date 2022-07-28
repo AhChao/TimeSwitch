@@ -107,6 +107,7 @@ const app = Vue.createApp({
             this.itemList.push(
                 {
                     "itemId": newId,
+                    "displayOrder": newId,
                     "itemName": copyTarget.itemName,
                     "totalSecond": 0,
                     "bgColor": copyTarget.bgColor,
