@@ -96,6 +96,19 @@ const app = Vue.createApp({
         getRandomColor() {
             return "#" + Math.floor(Math.random() * 16777215).toString(16);
         },
+        copyItem(itemId) {
+            let copyTarget = this.getTargetItemById(itemId);
+            let newId = Math.max(...this.itemList.map(x => x.itemId)) + 1;
+            this.itemList.push(
+                {
+                    "itemId": newId,
+                    "itemName": copyTarget.itemName,
+                    "totalSecond": 0,
+                    "bgColor": copyTarget.bgColor,
+                    "temp": ""
+                }
+            );
+        }
     }
 });
 app.mount('#app');

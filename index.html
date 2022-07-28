@@ -22,6 +22,7 @@
                     <div class="col-2">
                         <input v-bind:id="'color'+item.itemId" type="color" v-model="item.bgColor">
                         <span class="fs-2" @click="editTime(item.itemId)" data-bs-toggle="modal" data-bs-target="#modal">✎</span>
+                        <span class="fs-2" @click="copyItem(item.itemId)">🖅</span>
                         <span class="fs-2" @click="removeItem(item.itemId)">🗙</span>
                     </div>
                 </row>
