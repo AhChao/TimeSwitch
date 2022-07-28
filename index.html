@@ -15,13 +15,15 @@
         </div>
         <div id="contentArea">
             <div class="col-12">
-                <row v-for="item in itemList" :class="{row:true,focusedItem:timer.timerTarget == item.itemId}" :style="{'cursor': 'pointer', 'background-color': item.bgColor}">
-                    <div class="col-10">
+                <row v-for="item in sortedItemList" :class="{row:true,focusedItem:timer.timerTarget == item.itemId}" :style="{'cursor': 'pointer', 'background-color': item.bgColor}">
+                    <div class="col-9">
                         <span class="fs-2"><input class="makeInputLookLikeText" v-model="item.itemName"> | </span><span class="fs-2" @click="changeTimerTarget(item.itemId)"> {{convertToDisplayTime(item.totalSecond)}}</span>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <input v-bind:id="'color'+item.itemId" type="color" v-model="item.bgColor">
                         <span class="fs-2" @click="editTime(item.itemId)" data-bs-toggle="modal" data-bs-target="#modal">✎</span>
+                        <span class="fs-2" @click="moveItem(item.itemId,-1)">▲</span>
+                        <span class="fs-2" @click="moveItem(item.itemId,1)">▼</span>
                         <span class="fs-2" @click="copyItem(item.itemId)">🖅</span>
                         <span class="fs-2" @click="removeItem(item.itemId)">🗙</span>
                     </div>

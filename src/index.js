@@ -12,6 +12,7 @@ const app = Vue.createApp({
             },
             itemList: [{
                 "itemId": 0,
+                "displayOrder": 0,
                 "itemName": "Read related material",
                 "totalSecond": 0,
                 "bgColor": this.getRandomColor(),
@@ -22,6 +23,9 @@ const app = Vue.createApp({
         this.init();
     },
     computed: {
+        sortedItemList() {
+            return this.itemList.sort(function (a, b) { return a.displayOrder - b.displayOrder; });
+        }
     },
     methods: {
         init() {
@@ -44,6 +48,7 @@ const app = Vue.createApp({
             this.itemList.push(
                 {
                     "itemId": newId,
+                    "displayOrder": newId,
                     "itemName": "Click to edit",
                     "totalSecond": 0,
                     "bgColor": this.getRandomColor(),
@@ -108,6 +113,16 @@ const app = Vue.createApp({
                     "temp": ""
                 }
             );
+        },
+        moveItem(itemId, dis) {
+            if (this.itemList.length < 2) return;
+            let itemA = this.getTargetItemById(itemId);
+            let itemB = this.itemList.filter(x => x.displayOrder == (itemA.displayOrder + dis))[0];
+            console.log(itemA.displayOrder, itemB);
+            if (itemB == undefined) return;
+            let temp = itemA.displayOrder;
+            itemA.displayOrder = itemB.displayOrder;
+            itemB.displayOrder = temp;
         }
     }
 });
